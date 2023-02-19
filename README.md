@@ -2,7 +2,7 @@
 ====
 ```bash
 $ cd ~
-$ git clone https://github.com/ducthien1490/.vim.git
+$ git clone https://github.com/sontung1010/.vim.git
 $ cd .vim
 $ rake setup
 $ vim
