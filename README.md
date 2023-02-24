@@ -7,3 +7,7 @@ $ cd .vim
 $ rake setup
 $ vim
 $ --> :PlugInstall
+
+Demo
+
+![Demo](Demo.png)

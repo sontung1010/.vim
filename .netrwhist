@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =6
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/st/.vim'
 let g:netrw_dirhist_6='/Users/st'
 let g:netrw_dirhist_5='/home/st'
 let g:netrw_dirhist_4='/home/st/ros_ws/src/my_robot_controller'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_1='/home/st/.vim'
 let g:netrw_dirhist_0='/home/st'
 let g:netrw_dirhist_9='/home/st/.vim'
 let g:netrw_dirhist_8='/home/st'
-let g:netrw_dirhist_7='/home/st/.vim/colors'
