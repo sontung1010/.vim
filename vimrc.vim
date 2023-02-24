@@ -12,11 +12,11 @@ filetype on
 set laststatus=2 " Always show the statusline "
 set encoding=utf-8 " Necessary to show Unicode glyphs "
 set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+"call vundle#rc()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+"Bundle 'gmarik/vundle'
 
 
 
@@ -24,11 +24,11 @@ let g:syntastic_aggregate_errors = 1
 let g:syntastic_auto_loc_list = 1
 let g:netrw_liststyle = 6
 
-Bundle 'hashivim/vim-terraform'
-Bundle 'godlygeek/tabular'
+"Bundle 'hashivim/vim-terraform'
+"Bundle 'godlygeek/tabular'
 
-Plugin 'vim-python/python-syntax'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+"Plugin 'vim-python/python-syntax'
+"Plugin 'octol/vim-cpp-enhanced-highlight'
 
 call plug#begin()
   Plug 'ghifarit53/tokyonight-vim'
@@ -45,6 +45,8 @@ call plug#begin()
   Plug 'uiiaoo/java-syntax.vim'
   Plug 'vim-python/python-syntax'
   Plug 'itchyny/lightline.vim'
+  Plug 'vim-python/python-syntax'
+  Plug 'octol/vim-cpp-enhanced-highlight'
 call plug#end()
 
 set termguicolors
