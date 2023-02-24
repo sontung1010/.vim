@@ -1,3 +1,8 @@
+Demo
+
+![Demo](Demo.png)
+
+
 .vim
 ====
 ```bash
@@ -8,6 +13,3 @@ $ rake setup
 $ vim
 $ --> :PlugInstall
 
-Demo
-
-![Demo](Demo.png)
