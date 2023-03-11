@@ -80,7 +80,7 @@ set smartindent
 set number
 set cursorline!
 set cursorcolumn
-"set colorcolumn=80
+set colorcolumn=80
 set hlsearch
 set noswapfile
 set ttyfast
