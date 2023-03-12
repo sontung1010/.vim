@@ -92,6 +92,7 @@ set incsearch
 "set textwidth=80
 "set formatoptions+=t
 set wrap linebreak
+
 colorscheme molokai
 "molokai, onedark, monokai, tokyonight
 highlight Comment ctermfg=Gray
