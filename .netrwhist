@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =4
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/st/.vim'
+let g:netrw_dirhist_6='/Users/st'
+let g:netrw_dirhist_5='/Users/st/.vim'
 let g:netrw_dirhist_4='/Users/st'
 let g:netrw_dirhist_3='/Users/st/.vim'
 let g:netrw_dirhist_2='/Users/st'
@@ -7,6 +10,3 @@ let g:netrw_dirhist_1='/Users/st/.Trash'
 let g:netrw_dirhist_0='/Users/st'
 let g:netrw_dirhist_9='/Users/st/.conda'
 let g:netrw_dirhist_8='/Users/st'
-let g:netrw_dirhist_7='/'
-let g:netrw_dirhist_6='/usr'
-let g:netrw_dirhist_5='/usr/local'

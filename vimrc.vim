@@ -80,7 +80,7 @@ set smartindent
 set number
 set cursorline!
 set cursorcolumn
-set colorcolumn=80
+"set colorcolumn=80
 set hlsearch
 set noswapfile
 set ttyfast
@@ -89,6 +89,9 @@ set backspace=indent,eol,start
 set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 set noerrorbells
 set incsearch
+"set textwidth=80
+"set formatoptions+=t
+set wrap linebreak
 colorscheme molokai
 "molokai, onedark, monokai, tokyonight
 highlight Comment ctermfg=Gray
