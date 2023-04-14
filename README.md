@@ -21,7 +21,7 @@ Quit terminal and reopen it to activate vim from brew
 
 ```bash
 cd ~
-git clone https://github.com/sontung1010/vimrc.git
+git clone https://github.com/sontung1010/.vim.git
 cd .vim
 rake setup
 vim .vimrc
