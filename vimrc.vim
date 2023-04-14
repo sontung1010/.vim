@@ -40,7 +40,6 @@ call plug#begin()
   Plug 'uiiaoo/java-syntax.vim'
   Plug 'vim-python/python-syntax'
   Plug 'itchyny/lightline.vim'
-  Plug 'vim-python/python-syntax'
   Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'preservim/nerdcommenter'
   Plug 'preservim/nerdtree' |
