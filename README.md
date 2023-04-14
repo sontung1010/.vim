@@ -30,6 +30,11 @@ vim .vimrc
 
 Everytime put in a new Plug, make sure to save vimrc file then quit terminal, reopen it and run :PlugInstall to make sure everything run properly
 
+For YouCompleteMe, follow this link to install:
+
+```
+https://vimawesome.com/plugin/youcompleteme#full-installation-guide
+```
 Workspace setup
 ====
 
