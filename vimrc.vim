@@ -51,6 +51,7 @@ call plug#begin()
   Plug 'farmergreg/vim-lastplace'
   Plug 'mhinz/vim-signify'
   Plug 'valloric/youcompleteme'
+  Plug 'vhda/verilog_systemverilog.vim'
 call plug#end()
 
 " Start NERDTree. If a file is specified, move the cursor to its window.
