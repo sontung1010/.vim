@@ -64,7 +64,7 @@ autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | e
 let NERDTreeShowHidden = 1
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
+set completeopt-=preview
 
 set termguicolors
 let g:tokyonight_style = 'night' " available: night, storm
