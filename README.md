@@ -33,9 +33,23 @@ Everytime put in a new Plug, make sure to save vimrc file then quit terminal, re
 For YouCompleteMe, follow this link to install:
 
 ```
-https://vimawesome.com/plugin/youcompleteme#full-installation-guide
+https://github.com/ycm-core/YouCompleteMe
 ```
-Workspace setup
+
+BASH setup
+====
+From this link: https://thucnc.medium.com/how-to-show-current-git-branch-with-colors-in-bash-prompt-380d05a24745, paste this in bashrc:
+
+```bash
+# show git branch in prompt
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+export PS1="\u@\h \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
+```
+
+
+ZSH setup (Be careful when working with ROS)
 ====
 
 - Install Homebrew for MacOS
