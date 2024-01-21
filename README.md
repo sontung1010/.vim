@@ -108,8 +108,10 @@ git_prompt() {
 # prompt. Tweak as you see fit, or just stick "$(git_prompt)" into your
 # favorite prompt.
 PS1='$debian_chroot\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w$(git_prompt)\[\033[00m\]\$ '
-```
 
+# Set history format to include timestamps
+HISTTIMEFORMAT="%Y-%m-%d %T "
+```
 
 ZSH setup (Be careful when working with ROS)
 ====

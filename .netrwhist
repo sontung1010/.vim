@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =0
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/st/heron_model_linux/heron/heron_description/urdf'
 let g:netrw_dirhist_0='/Users/st/.vim/plugged'
 let g:netrw_dirhist_9='/Users/st/.vim'
 let g:netrw_dirhist_8='/Users/st'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_5='/Library'
 let g:netrw_dirhist_4='/Library/Preferences'
 let g:netrw_dirhist_3='/Library'
 let g:netrw_dirhist_2='/'
-let g:netrw_dirhist_1='/Users'
