@@ -44,13 +44,13 @@ call plug#begin()
   Plug 'preservim/nerdcommenter'
   Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-            \ Plug 'ryanoasis/vim-devicons'
+            "\ Plug 'ryanoasis/vim-devicons'
   Plug 'godlygeek/tabular'
   Plug 'wesQ3/vim-windowswap'
   Plug 'tpope/vim-fugitive'
   Plug 'farmergreg/vim-lastplace'
   Plug 'mhinz/vim-signify'
-  Plug 'valloric/youcompleteme'
+  "Plug 'valloric/youcompleteme'
   Plug 'vhda/verilog_systemverilog.vim'
 call plug#end()
 
