@@ -42,8 +42,8 @@ call plug#begin()
   Plug 'itchyny/lightline.vim'
   Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'preservim/nerdcommenter'
-  Plug 'preservim/nerdtree' |
-            \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+  "Plug 'preservim/nerdtree' |
+            "\ Plug 'Xuyuanp/nerdtree-git-plugin' |
             "\ Plug 'ryanoasis/vim-devicons'
   Plug 'godlygeek/tabular'
   Plug 'wesQ3/vim-windowswap'
@@ -55,8 +55,8 @@ call plug#begin()
 call plug#end()
 
 " Start NERDTree. If a file is specified, move the cursor to its window.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
 " Start NERDTree and leave the cursor in it.
 "autocmd VimEnter * NERDTree
