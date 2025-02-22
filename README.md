@@ -112,8 +112,8 @@ PS1='$debian_chroot\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w$(git_promp
 # Set history format to include timestamps
 HISTTIMEFORMAT="%Y-%m-%d %T "
 
-# fzf search
-source /usr/share/doc/fzf/examples/key-bindings.bash
+# fzf search, put this below the installation
+[ -f ~/.fzf/shell/key-bindings.bash ] && source ~/.fzf/shell/key-bindings.bash
 ```
 
 ZSH setup (Be careful when working with ROS)
