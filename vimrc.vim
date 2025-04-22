@@ -29,7 +29,7 @@ call plug#begin()
   Plug 'ghifarit53/tokyonight-vim'
   Plug 'joshdick/onedark.vim'
   Plug 'sickill/vim-monokai'
-  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+  "Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'vim-ruby/vim-ruby'
