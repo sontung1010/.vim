@@ -24,7 +24,7 @@ cd ~
 git clone https://github.com/sontung1010/.vim.git
 cd .vim
 rake setup
-vim .vimrc
+vim vimrc.vim
 -->:PlugInstall
 ```
 
