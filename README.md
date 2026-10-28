@@ -114,6 +114,18 @@ HISTTIMEFORMAT="%Y-%m-%d %T "
 
 # fzf search, put this below the installation
 [ -f ~/.fzf/shell/key-bindings.bash ] && source ~/.fzf/shell/key-bindings.bash
+
+# notify training is complete
+notify_done() {
+  local rc=$?
+  if [ $rc -eq 0 ]; then
+    notify-send -u critical "Training finished" "${1:-done} ($(date +%H:%M))"
+  else
+    notify-send -u critical "Training FAILED (exit $rc)" "${1:-job} ($(date +%H:%M))"
+  fi
+  paplay /usr/share/sounds/freedesktop/stereo/complete.oga 2>/dev/null
+  return $rc
+}
 ```
 
 ZSH setup (Be careful when working with ROS)
