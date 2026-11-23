@@ -1,43 +1,78 @@
-Demo
+# .vim
 
-![Demo](Demo.png)
+![Demo](docs/Demo.png)
 
+Personal vim config (vim-plug) plus a one-file **offline installer** for machines
+without network or sudo, e.g. an edge PC that only ships the stock `vi` (vim-tiny).
 
-.vim
-====
-For MacOS, install homebrew:
 ```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+vimrc.vim                 config (~/.vimrc -> ~/.vim/vimrc.vim)
+autoload/plug.vim         vim-plug
+colors/                   colorschemes not managed by vim-plug
+install.sh                install for the current user (no sudo, no network)
+bundle.sh                 build dist/vim-offline.sh
+tools/build-static-vim.sh build static (musl) vim for x86_64/aarch64 (no Docker/root)
+docs/                     cheat sheet, screenshot
+plugged/ build/ dist/     generated, gitignored
 ```
-Then install vim with python3 support from brew, the pre-installed vim on Mac does not support python3 that make youcompleteme unavailable:
-```
-brew install vim
-```
-Might need to run brew link:
-```
-brew link vim
-```
-Quit terminal and reopen it to activate vim from brew
+
+## Normal setup (machine with network)
 
 ```bash
-cd ~
-git clone https://github.com/sontung1010/.vim.git
-cd .vim
-rake setup
-vim vimrc.vim
--->:PlugInstall
+git clone https://github.com/sontung1010/.vim.git ~/.vim
+~/.vim/install.sh                 # links ~/.vimrc
+vim +PlugInstall +qa              # fetch plugins into ~/.vim/plugged
 ```
 
-Everytime put in a new Plug, make sure to save vimrc file then quit terminal, reopen it and run :PlugInstall to make sure everything run properly
+After adding a `Plug '...'` line: save, restart vim, run `:PlugInstall`.
 
-For YouCompleteMe, follow this link to install:
+## Offline install (edge PC, no network, no sudo)
 
+On the laptop (needs network the first time, ~250 MB of toolchains/sources cached in `build/`):
+
+```bash
+cd ~/.vim
+./bundle.sh                       # -> dist/vim-offline.sh (~20 MB)
+./bundle.sh --update              # same, but :PlugUpdate first
 ```
-https://github.com/ycm-core/YouCompleteMe
+
+Copy the single file over and run it:
+
+```bash
+scp dist/vim-offline.sh edge:~
+ssh edge sh vim-offline.sh
 ```
 
-BASH setup
-====
+What it does on the target, all inside `$HOME`:
+
+- copies config + plugins to `~/.vim` (an existing one is moved to `~/.vim.bak-<time>`), links `~/.vimrc`
+- if there is no full vim (only vim-tiny or nothing), installs a static vim 9.2 to
+  `~/.local/opt/vim` with `vim`, `vi`, `vimdiff`, `view` wrappers in `~/.local/bin`
+- installs `fzf` for the vim plugin (and in `~/.local/bin` if missing)
+- adds `~/.local/bin` to `PATH` in `~/.bashrc`
+
+The static binaries have no runtime dependencies (musl + ncurses with built-in
+terminfo for xterm/screen/tmux/linux), so they work on any Linux of that CPU
+architecture (x86_64 PCs, aarch64 Jetson/RPi), regardless of distro or glibc version.
+
+Installer options (pass after the file name, e.g. `sh vim-offline.sh --vim yes`):
+
+| option | meaning |
+|---|---|
+| `--vim auto\|yes\|no` | install the static vim: only when no full vim exists (default), always, never |
+| `--no-vi` | do not shadow `vi` with the static vim |
+| `--prefix DIR` | install binaries under `DIR` instead of `~/.local` |
+| `--extract [DIR]` | only unpack the bundle, do not install |
+
+Uninstall: `rm -rf ~/.local/opt/vim ~/.local/bin/{vim,vi,vimdiff,view}` and remove
+the `vim-offline` block from `~/.bashrc`.
+
+## macOS
+
+The stock vim lacks python3; use `brew install vim` (then `brew link vim`) and
+reopen the terminal, then follow *Normal setup*.
+
+## Bash setup
 From this link: https://askubuntu.com/questions/851186/how-to-add-colored-git-branch-to-my-bash-prompt#:~:text=You%20only%20need%20to%20use,resets%20formatting%20on%20the%20text.
 paste this in bashrc:
 
@@ -128,8 +163,7 @@ notify_done() {
 }
 ```
 
-ZSH setup (Be careful when working with ROS)
-====
+## Zsh setup (careful when working with ROS)
 
 - Install Homebrew for MacOS
 - Install iTerm2 or Terminator

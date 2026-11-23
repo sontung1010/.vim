@@ -1,77 +1,48 @@
-augroup HighlightTrailingSpaces
-  autocmd!
-  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
-  autocmd VimEnter,WinEnter, * match TrailingSpaces /\s\+$/
-augroup END
-execute pathogen#infect()
-execute pathogen#helptags()
+" ~/.vimrc -> ~/.vim/vimrc.vim
+" Skip everything on vim-tiny/vim-small (no +eval), e.g. the stock `vi`.
+if !1 | finish | endif
+
 set nocompatible
-syntax on
-syntax enable
-filetype on
-set laststatus=2 " Always show the statusline "
-set encoding=utf-8 " Necessary to show Unicode glyphs "
-set rtp+=~/.vim/bundle/vundle
-"call vundle#rc()
+set encoding=utf-8
 
-" let Vundle manage Vundle
-" required!
-"Bundle 'gmarik/vundle'
-
-
-
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_auto_loc_list = 1
-let g:netrw_liststyle = 6
-
-
-call plug#begin()
+" ---------------------------------------------------------------- plugins
+" Plugins live in ~/.vim/plugged (gitignored). Install with :PlugInstall,
+" or ship them offline with ./bundle.sh. Missing plugins are simply skipped.
+call plug#begin('~/.vim/plugged')
+  " colorschemes
   Plug 'ghifarit53/tokyonight-vim'
   Plug 'joshdick/onedark.vim'
   Plug 'sickill/vim-monokai'
-  "Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  " search
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  " syntax
   Plug 'vim-ruby/vim-ruby'
   Plug 'yuezk/vim-js'
-  Plug 'tpope/vim-surround'
   Plug 'maxmellon/vim-jsx-pretty'
-  Plug 'jiangmiao/auto-pairs'
   Plug 'uiiaoo/java-syntax.vim'
   Plug 'vim-python/python-syntax'
-  Plug 'itchyny/lightline.vim'
   Plug 'octol/vim-cpp-enhanced-highlight'
+  Plug 'vhda/verilog_systemverilog.vim'
+  " editing
+  Plug 'tpope/vim-surround'
+  Plug 'jiangmiao/auto-pairs'
   Plug 'preservim/nerdcommenter'
-  "Plug 'preservim/nerdtree' |
-            "\ Plug 'Xuyuanp/nerdtree-git-plugin' |
-            "\ Plug 'ryanoasis/vim-devicons'
   Plug 'godlygeek/tabular'
   Plug 'wesQ3/vim-windowswap'
+  " ui / git
+  Plug 'itchyny/lightline.vim'
   Plug 'tpope/vim-fugitive'
-  Plug 'farmergreg/vim-lastplace'
   Plug 'mhinz/vim-signify'
-  "Plug 'valloric/youcompleteme'
-  Plug 'vhda/verilog_systemverilog.vim'
-call plug#end()
+  Plug 'farmergreg/vim-lastplace'
+call plug#end()   " also runs: filetype plugin indent on | syntax enable
 
-" Start NERDTree. If a file is specified, move the cursor to its window.
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
-
-" Start NERDTree and leave the cursor in it.
-"autocmd VimEnter * NERDTree
-
-let NERDTreeShowHidden = 1
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-set completeopt-=preview
-
-set termguicolors
-let g:tokyonight_style = 'night' " available: night, storm
+" ---------------------------------------------------------------- plugin options
+let g:tokyonight_style = 'night'          " night, storm
 let g:tokyonight_enable_italic = 0
 let g:tokyonight_disable_italic_comment = 1
 let g:tokyonight_transparent_background = 0
-let g:lightline = {'colorscheme' : 'tokyonight'}
+let g:lightline = {'colorscheme': 'tokyonight'}
 
 let g:python_highlight_all = 1
 let g:cpp_class_scope_highlight = 1
@@ -81,37 +52,37 @@ let g:cpp_posix_standard = 1
 let g:cpp_experimental_simple_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
+let g:netrw_liststyle = 6
+let g:netrw_dirhistmax = 0                " do not write ~/.vim/.netrwhist
 
-let g:go_info_mode='gocode'
-let g:terraform_align=1
-filetype plugin indent on
-set t_Co=256
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set smarttab
-set shiftround
-set autoindent
-set smartindent
+" ---------------------------------------------------------------- editor
+set laststatus=2
+set tabstop=2 shiftwidth=2 softtabstop=2 expandtab smarttab shiftround
+set autoindent smartindent
 set number
-set cursorline!
-set cursorcolumn
-"set colorcolumn=80
-set hlsearch
+set cursorline cursorcolumn
+set hlsearch incsearch
 set noswapfile
-set ttyfast
-set lazyredraw
+set ttyfast lazyredraw
 set backspace=indent,eol,start
-set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 set noerrorbells
-set incsearch
-"set textwidth=80
-"set formatoptions+=t
 set wrap linebreak
+set completeopt-=preview
 
-colorscheme molokai
-"molokai, onedark, monokai, tokyonight
+" ---------------------------------------------------------------- colors
+" True color everywhere except the bare Linux console.
+if has('termguicolors') && $TERM !=# 'linux'
+  set termguicolors
+endif
+silent! colorscheme molokai               " molokai, onedark, monokai, tokyonight
 highlight Comment ctermfg=Gray
 
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+augroup END
+
+" ---------------------------------------------------------------- commands
+" :Find <text>  -> ripgrep through fzf (needs `rg`)
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)

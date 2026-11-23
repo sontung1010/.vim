@@ -1,1 +1,13 @@
-plugged/
+# Plugins installed by vim-plug (:PlugInstall or ./bundle.sh)
+/plugged/
+
+# Build outputs of ./bundle.sh and tools/build-static-vim.sh
+/build/
+/dist/
+/offline/
+
+# Vim / editor state
+.netrwhist
+/tags
+*.swp
+*~
