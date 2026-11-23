@@ -9,18 +9,14 @@ set encoding=utf-8
 " Plugins live in ~/.vim/plugged (gitignored). Install with :PlugInstall,
 " or ship them offline with ./bundle.sh. Missing plugins are simply skipped.
 call plug#begin('~/.vim/plugged')
-  " colorschemes
-  Plug 'ghifarit53/tokyonight-vim'
-  Plug 'joshdick/onedark.vim'
-  Plug 'sickill/vim-monokai'
+  " colorschemes (molokai itself is in ~/.vim/colors)
+  Plug 'ghifarit53/tokyonight-vim'          " also provides the lightline theme
   " search
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  " syntax
-  Plug 'vim-ruby/vim-ruby'
+  " syntax (ruby/java: vim's built-in runtime files are up to date)
   Plug 'yuezk/vim-js'
   Plug 'maxmellon/vim-jsx-pretty'
-  Plug 'uiiaoo/java-syntax.vim'
   Plug 'vim-python/python-syntax'
   Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'vhda/verilog_systemverilog.vim'
@@ -74,7 +70,7 @@ set completeopt-=preview
 if has('termguicolors') && $TERM !=# 'linux'
   set termguicolors
 endif
-silent! colorscheme molokai               " molokai, onedark, monokai, tokyonight
+silent! colorscheme molokai               " molokai, tokyonight
 highlight Comment ctermfg=Gray
 
 augroup HighlightTrailingSpaces

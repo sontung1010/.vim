@@ -11,3 +11,6 @@
 /tags
 *.swp
 *~
+
+# Installer marker (created on target machines)
+/.vim-offline

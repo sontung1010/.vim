@@ -7,10 +7,11 @@ without network or sudo, e.g. an edge PC that only ships the stock `vi` (vim-tin
 
 ```
 vimrc.vim                 config (~/.vimrc -> ~/.vim/vimrc.vim)
+plugins.lock              plugin commits that go into the offline bundle
 autoload/plug.vim         vim-plug
-colors/                   colorschemes not managed by vim-plug
+colors/                   colorschemes not managed by vim-plug (molokai)
 install.sh                install for the current user (no sudo, no network)
-bundle.sh                 build dist/vim-offline.sh
+bundle.sh                 build (and deploy) dist/vim-offline.sh
 tools/build-static-vim.sh build static (musl) vim for x86_64/aarch64 (no Docker/root)
 docs/                     cheat sheet, screenshot
 plugged/ build/ dist/     generated, gitignored
@@ -25,18 +26,21 @@ vim +PlugInstall +qa              # fetch plugins into ~/.vim/plugged
 ```
 
 After adding a `Plug '...'` line: save, restart vim, run `:PlugInstall`.
+After removing one: `:PlugClean`.
 
 ## Offline install (edge PC, no network, no sudo)
 
-On the laptop (needs network the first time, ~250 MB of toolchains/sources cached in `build/`):
+On the laptop (needs network the first time, ~250 MB of toolchains/sources cached
+in `build/`; the static vim build takes ~5 min once):
 
 ```bash
 cd ~/.vim
-./bundle.sh                       # -> dist/vim-offline.sh (~20 MB)
-./bundle.sh --update              # same, but :PlugUpdate first
+./bundle.sh --deploy edge1 --deploy user@edge2   # build, scp, install, clean up
+./bundle.sh --deploy edge1 -- --vim yes          # options after -- go to the installer
+./bundle.sh                                      # only build dist/vim-offline.sh (~20 MB)
 ```
 
-Copy the single file over and run it:
+Without `--deploy`, copy the single file by hand (USB stick, jump host, ...):
 
 ```bash
 scp dist/vim-offline.sh edge:~
@@ -45,11 +49,15 @@ ssh edge sh vim-offline.sh
 
 What it does on the target, all inside `$HOME`:
 
-- copies config + plugins to `~/.vim` (an existing one is moved to `~/.vim.bak-<time>`), links `~/.vimrc`
+- copies config + plugins to `~/.vim` and links `~/.vimrc`. A `~/.vim` from an earlier
+  run is kept as `~/.vim.bak` (only one); any other `~/.vim` as `~/.vim.bak-<time>`
 - if there is no full vim (only vim-tiny or nothing), installs a static vim 9.2 to
   `~/.local/opt/vim` with `vim`, `vi`, `vimdiff`, `view` wrappers in `~/.local/bin`
 - installs `fzf` for the vim plugin (and in `~/.local/bin` if missing)
-- adds `~/.local/bin` to `PATH` in `~/.bashrc`
+- keeps one `vim-offline` block in `~/.bashrc` (and `~/.zshrc` if present): adds
+  `~/.local/bin` to `PATH` and sets `EDITOR`/`VISUAL` to this vim unless already set,
+  so `git commit` and `sudoedit FILE` use it. (`sudo vi` still runs root's vim-tiny:
+  use `sudoedit` for system files.)
 
 The static binaries have no runtime dependencies (musl + ncurses with built-in
 terminfo for xterm/screen/tmux/linux), so they work on any Linux of that CPU
@@ -64,8 +72,20 @@ Installer options (pass after the file name, e.g. `sh vim-offline.sh --vim yes`)
 | `--prefix DIR` | install binaries under `DIR` instead of `~/.local` |
 | `--extract [DIR]` | only unpack the bundle, do not install |
 
-Uninstall: `rm -rf ~/.local/opt/vim ~/.local/bin/{vim,vi,vimdiff,view}` and remove
+Uninstall: `rm -rf ~/.local/opt/vim ~/.local/bin/{vim,vi,vimdiff,view,fzf}` and remove
 the `vim-offline` block from `~/.bashrc`.
+
+### Plugin versions (`plugins.lock`)
+
+The bundle always contains the commits listed in `plugins.lock` (exported with
+`git archive`, your `~/.vim/plugged` is not touched), so every edge machine gets the
+same plugins no matter when the bundle was built. Commit the lock file.
+
+- `./bundle.sh --update` runs `:PlugUpdate` and pins the new commits
+- a plugin added to `vimrc.vim` is pinned at its installed commit; a removed one is dropped
+- if `~/.vim/plugged` is ahead of the lock (e.g. after `:PlugUpdate` in vim),
+  `bundle.sh` warns and still bundles the locked commit
+- `./bundle.sh --no-plug` skips vim-plug entirely (no network needed once cached)
 
 ## macOS
 

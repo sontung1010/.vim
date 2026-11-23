@@ -24,7 +24,16 @@ ROOT=$(cd "$(dirname "$0")/.." && pwd)
 OUT=$ROOT/build/vim-static/$VIM_VERSION
 CACHE=$ROOT/build/cache
 TC=$ROOT/build/work/toolchains   # unpacked on demand, removed after the build
-mkdir -p "$OUT" "$CACHE" "$TC"
+mkdir -p "$CACHE"
+
+# Rebuild when this script (flags, versions) changed since the last build.
+BUILD_ID=$(sha256sum "$0" | cut -c1-16)
+if [ -d "$OUT" ] && [ "$(cat "$OUT/.build-id" 2>/dev/null)" != "$BUILD_ID" ]; then
+  echo "build script changed since last build -> rebuilding $OUT"
+  rm -rf "$OUT"
+fi
+mkdir -p "$OUT" "$TC"
+echo "$BUILD_ID" > "$OUT/.build-id"
 
 missing=""
 for a in $ARCHES; do [ -x "$OUT/vim-$a" ] || missing="$missing $a"; done
@@ -90,7 +99,8 @@ for ARCH in $missing; do
     ./configure --host=$T --prefix=/opt/vim --with-features=huge --enable-multibyte \
       --with-tlib=tinfow --disable-gui --without-x --without-wayland --disable-nls --disable-netbeans \
       --disable-gpm --disable-sysmouse --disable-selinux --disable-smack \
-      --disable-canberra --disable-libsodium --disable-xattr --enable-fail-if-missing
+      --disable-canberra --disable-libsodium --disable-xattr --enable-fail-if-missing \
+      --with-compiledby=vim-offline
     make -j"$JOBS"
     $T-strip -o "$OUT/vim-$ARCH" src/vim
     if [ ! -d "$OUT/runtime" ]; then

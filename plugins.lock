@@ -1,0 +1,18 @@
+# Plugin commits bundled by ./bundle.sh. Bump with: ./bundle.sh --update
+auto-pairs 39f06b873a8449af8ff6a3eee716d3da14d63a76 https://github.com/jiangmiao/auto-pairs.git
+fzf 9a0705815cc690552ac5e2c0a6b51fd4ed3e831a https://github.com/junegunn/fzf.git
+fzf.vim 3cb44a8ba588e1ada409af495bdc6a4d2d37d5da https://github.com/junegunn/fzf.vim.git
+lightline.vim e358557e1a9f9fc860416c8eb2e34c0404078155 https://github.com/itchyny/lightline.vim.git
+nerdcommenter 02a3b6455fa07b61b9440a78732f1e9b7876c991 https://github.com/preservim/nerdcommenter.git
+python-syntax 2cc00ba72929ea5f9456a26782db57fb4cc56a65 https://github.com/vim-python/python-syntax.git
+tabular 12437cd1b53488e24936ec4b091c9324cafee311 https://github.com/godlygeek/tabular.git
+tokyonight-vim 4e82e0f0452a6ce8f387828ec71013015515035a https://github.com/ghifarit53/tokyonight-vim.git
+verilog_systemverilog.vim 5d1ea7c50a66a2f6c6002214344b16de02996ecc https://github.com/vhda/verilog_systemverilog.vim.git
+vim-cpp-enhanced-highlight 4b7314a497ea2dd0a6911ccb94ce83b2d8684617 https://github.com/octol/vim-cpp-enhanced-highlight.git
+vim-fugitive 4a745ea72fa93bb15dd077109afbb3d1809383f2 https://github.com/tpope/vim-fugitive.git
+vim-js 35d9e2ef4d31618237463e3bdf4811b2f8a0dec5 https://github.com/yuezk/vim-js.git
+vim-jsx-pretty 6989f1663cc03d7da72b5ef1c03f87e6ddb70b41 https://github.com/maxmellon/vim-jsx-pretty.git
+vim-lastplace e58cb0df716d3c88605ae49db5c4741db8b48aa9 https://github.com/farmergreg/vim-lastplace.git
+vim-signify 8670143f9e12ed1cd3c9b2c54f345cdd9a4baac3 https://github.com/mhinz/vim-signify.git
+vim-surround 3d188ed2113431cf8dac77be61b842acb64433d9 https://github.com/tpope/vim-surround.git
+vim-windowswap 15db3f697aa1fa696d99fcdc920c90cd2cec855e https://github.com/wesQ3/vim-windowswap.git
